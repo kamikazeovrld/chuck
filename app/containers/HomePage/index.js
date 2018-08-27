@@ -12,6 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectHomePage from './selectors';
@@ -19,7 +20,7 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-import Chuck from '../../components/Chuck';
+import Wrapper from '../../components/Wrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.Component {
@@ -31,7 +32,7 @@ export class HomePage extends React.Component {
           <meta name="description" content="Description of HomePage" />
         </Helmet>
         <FormattedMessage {...messages.header} />
-        <Chuck/>
+        <Wrapper />
       </div>
     );
   }
