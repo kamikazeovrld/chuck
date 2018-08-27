@@ -12,6 +12,7 @@ import Mirror from 'components/Mirror';
 import Desk from 'components/Desk';
 import Vase from 'components/Vase';
 import Cabinet from 'components/Cabinet';
+import City from 'components/City';
 
 const Container = styled.div`
   @keyframes scene {
@@ -34,10 +35,7 @@ const Container = styled.div`
 function Scene() {
   return (
     <Container>
-      <Mirror />
-      <Desk />
-      <Vase />
-      <Cabinet />
+      <City />
     </Container>
   );
 }
