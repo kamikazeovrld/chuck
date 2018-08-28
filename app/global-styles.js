@@ -17,12 +17,11 @@ html {
 
 body {
     display: flex;
-    background: #9c6da4;
-    align-items: center;
+    background: #03a9f4;
     justify-content: center;
     min-height: 100%;
 }
 body > * {
-    vertical-align: middle;
+    // vertical-align: middle;
 }
 `;

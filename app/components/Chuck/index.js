@@ -21,7 +21,7 @@ import Shoes from '../../components/Shoes';
 const Container = styled.div`
   position: absolute;
   z-index: 1;
-  top: 240rem;
+  top: 375rem;
   left: 140rem;
   transform: rotateZ(6deg);
 `;

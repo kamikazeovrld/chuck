@@ -8,7 +8,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -20,20 +19,13 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-import Wrapper from '../../components/Wrapper';
+import Home from '../../components/Home';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.Component {
   render() {
     return (
-      <div>
-        <Helmet>
-          <title>HomePage</title>
-          <meta name="description" content="Description of HomePage" />
-        </Helmet>
-        <FormattedMessage {...messages.header} />
-        <Wrapper />
-      </div>
+      <Home />
     );
   }
 }

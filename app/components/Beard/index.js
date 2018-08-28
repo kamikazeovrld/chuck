@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const Beard = styled.div`
   position: absolute;
-  background: #6a3c75;
+  background: #EE5C28;
   top: 2rem;
   left: 142rem;
   width: 75rem;

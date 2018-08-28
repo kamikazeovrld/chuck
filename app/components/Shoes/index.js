@@ -16,7 +16,7 @@ const Shoes = styled.div`
     }
   }
   position: absolute;
-  background: #4e2c55;
+  background: #643A12;
   top: 75rem;
   left: 490rem;
   width: 70rem;

@@ -34,7 +34,7 @@ const Arm = styled.div`
     }
   }
   position: absolute;
-  background: #6a3d73;
+  background: #699BE5;
   top: 30rem;
   left: 250rem;
   width: 75rem;
@@ -48,7 +48,7 @@ const Arm = styled.div`
     position: absolute;
   }
   :before {
-    background: #6a3d73;
+    background: #699BE5;
     top: 0;
     right: -10rem;
     width: 36rem;

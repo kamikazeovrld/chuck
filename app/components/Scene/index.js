@@ -13,6 +13,7 @@ import Desk from 'components/Desk';
 import Vase from 'components/Vase';
 import Cabinet from 'components/Cabinet';
 import City from 'components/City';
+import Categories from 'components/Categories';
 
 const Container = styled.div`
   @keyframes scene {
@@ -26,7 +27,7 @@ const Container = styled.div`
   position: relative;
   display: inline-block;
   width: 800rem;
-  height: 415rem;
+  height: 575rem;
   border-bottom: solid 10rem #905d9b;
   animation: scene 2s ease-in-out alternate infinite;
   transform-origin: 660rem 415rem;
@@ -36,6 +37,7 @@ function Scene() {
   return (
     <Container>
       <City />
+      <Categories />
     </Container>
   );
 }

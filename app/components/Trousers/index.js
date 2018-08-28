@@ -8,13 +8,13 @@ import styled from 'styled-components';
 
 const Trousers = styled.div`
   position: absolute;
-  background: #ba85cb;
+  background: #6F92CA;
   top: 34rem;
   left: 370rem;
   width: 190rem;
   height: 41rem;
-  border-left: solid 14rem #4d2957;
-  border-right: solid 32rem #4e2c55;
+  border-left: solid 14rem #2E4F96;
+  border-right: solid 32rem #643A12;
   :before {
     content: '';
     position: absolute;
@@ -22,7 +22,7 @@ const Trousers = styled.div`
     left: 2rem;
     width: 140rem;
     height: 2rem;
-    border-top: dashed 2rem #a661bc;
+    border-top: dashed 2rem 	#2E4F96;
   }
 `;
 

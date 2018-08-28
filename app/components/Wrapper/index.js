@@ -15,8 +15,7 @@ const Container = styled.div`
   position: relative;
   display: inline-block;
   width: 800rem;
-  height: 415rem;
-  margin: 100rem 0;
+  margin: 0rem 0;
 `;
 
 function Wrapper() {
