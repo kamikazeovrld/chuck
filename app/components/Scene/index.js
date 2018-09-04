@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Mirror from 'components/Mirror';
@@ -33,15 +33,29 @@ const Container = styled.div`
   transform-origin: 660rem 415rem;
 `;
 
-function Scene() {
+function Scene(props) {
+  const {categories, currentCategory, themedCategories, loading, error} = props
   return (
     <Container>
       <City />
-      <Categories />
+      <Categories
+        themedCategories={themedCategories}
+        currentCategory={currentCategory}
+        loading={loading}
+        error={error}
+      />
     </Container>
   );
 }
 
-Scene.propTypes = {};
+Scene.propTypes = {
+  loadCategories: PropTypes.func.isRequired,
+  homepage: PropTypes.object.isRequired,
+  themedCategories: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
+  currentCategory: PropTypes.string,
+  loading: PropTypes.string,
+  error: PropTypes.string,
+};
 
 export default Scene;

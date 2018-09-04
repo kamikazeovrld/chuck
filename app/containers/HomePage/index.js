@@ -11,9 +11,16 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import {
+  makeSelectThemedCategories,
+  makeSelectCategories,
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectCurrentCategory,
+} from 'containers/App/selectors';
+import { loadCategories } from 'containers/App/actions';
 import makeSelectHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -23,24 +30,37 @@ import Home from '../../components/Home';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.Component {
+  componentDidMount() {
+    this.props.loadCategories();
+  }
   render() {
-    return (
-      <Home />
-    );
+    console.log('props>', this.props);
+    return <Home {...this.props} />;
   }
 }
 
 HomePage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  loadCategories: PropTypes.func.isRequired,
+  homepage: PropTypes.object.isRequired,
+  themedCategories: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
+  currentCategory: PropTypes.string,
+  loading: PropTypes.string,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   homepage: makeSelectHomePage(),
+  themedCategories: makeSelectThemedCategories(),
+  categories: makeSelectCategories(),
+  currentCategory: makeSelectCurrentCategory(),
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    loadCategories: () => dispatch(loadCategories()),
   };
 }
 

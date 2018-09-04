@@ -8,3 +8,11 @@
  * Follow this format:
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
+
+export const LOAD_CATEGORIES = 'boilerplate/App/LOAD_CATEGORIES';
+export const LOAD_CATEGORIES_SUCCESS = 'boilerplate/App/LOAD_CATEGORIES_SUCCESS';
+export const LOAD_CATEGORIES_ERROR = 'boilerplate/App/LOAD_CATEGORIES_ERROR';
+
+export const LOAD_CATEGORY = 'boilerplate/App/LOAD_CATEGORY';
+export const LOAD_CATEGORY_SUCCESS = 'boilerplate/App/LOAD_CATEGORY_SUCCESS';
+export const LOAD_CATEGORY_ERROR = 'boilerplate/App/LOAD_CATEGORY_ERROR';

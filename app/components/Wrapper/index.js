@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Scene from 'components/Scene';
@@ -18,15 +18,23 @@ const Container = styled.div`
   margin: 0rem 0;
 `;
 
-function Wrapper() {
+function Wrapper(props) {
   return (
     <Container>
-      <Scene />
+      <Scene {...props} />
       <Chuck />
     </Container>
   );
 }
 
-Wrapper.propTypes = {};
+Wrapper.propTypes = {
+  loadCategories: PropTypes.func.isRequired,
+  homepage: PropTypes.object.isRequired,
+  themedCategories: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
+  currentCategory: PropTypes.string,
+  loading: PropTypes.string,
+  error: PropTypes.string,
+};
 
 export default Wrapper;

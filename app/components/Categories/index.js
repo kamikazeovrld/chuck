@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
@@ -71,46 +71,31 @@ const TitleText = styled.div`
 /* eslint-disable react/prefer-stateless-function */
 class Categories extends React.PureComponent {
   render() {
+    const categories = this.props.themedCategories.map((category, index) => {
+      const {image, title, primaryColor, secondaryColor} = category;
+      return (
+        <ItemContainer key={title}>
+          <ItemInnerContainer>
+            <Item><Icon bg={primaryColor} icon={image ? image : IconImage} /><Title bg={secondaryColor}><TitleText>{title}</TitleText></Title></Item>
+          </ItemInnerContainer>
+        </ItemContainer>
+      );
+    })
     return (
       <Container>
         <FormattedMessage {...messages.header} />
-        <div>
-          <ItemContainer>
-            <ItemInnerContainer>
-              <Item><Icon bg="#B9F6CA" icon={IconImage} /><Title bg="#1EE8B6"><TitleText>Title</TitleText></Title></Item>
-            </ItemInnerContainer>
-          </ItemContainer>
-          <ItemContainer>
-            <ItemInnerContainer>
-              <Item><Icon bg="#FFFF8D" icon={IconImage} /><Title bg="#FFEB3C"><TitleText>Title</TitleText></Title></Item>
-            </ItemInnerContainer>
-          </ItemContainer>
-          <ItemContainer>
-            <ItemInnerContainer>
-              <Item><Icon bg="#FF8A80" icon={IconImage} /><Title bg="#FF5253"><TitleText>Title</TitleText></Title></Item>
-            </ItemInnerContainer>
-          </ItemContainer>
-          <ItemContainer>
-            <ItemInnerContainer>
-              <Item><Icon bg="#84FEFF" icon={IconImage} /><Title bg="#03A9F5"><TitleText>Title</TitleText></Title></Item>
-            </ItemInnerContainer>
-          </ItemContainer>
-          <ItemContainer>
-            <ItemInnerContainer>
-              <Item><Icon bg="#B388FE" icon={IconImage} /><Title bg="#7E57C2"><TitleText>Title</TitleText></Title></Item>
-            </ItemInnerContainer>
-          </ItemContainer>
-          <ItemContainer>
-            <ItemInnerContainer>
-              <Item><Icon bg="#F5F5F5" icon={IconImage} /><Title bg="#999999"><TitleText>Title</TitleText></Title></Item>
-            </ItemInnerContainer>
-          </ItemContainer>
-        </div>
+        <div>{categories}</div>
       </Container>
     );
   }
 }
 
-Categories.propTypes = {};
+Categories.propTypes = {
+  themedCategories: PropTypes.array.isRequired,
+  categories: PropTypes.object.isRequired,
+  currentCategory: PropTypes.string,
+  loading: PropTypes.string,
+  error: PropTypes.string,
+};
 
 export default Categories;
