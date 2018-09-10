@@ -15,6 +15,7 @@ import Cabinet from 'components/Cabinet';
 import City from 'components/City';
 import Categories from 'components/Categories';
 import Loading from 'components/LoadingBar';
+import Clouds from 'components/Clouds';
 
 const Container = styled.div`
   @keyframes scene {
@@ -51,17 +52,13 @@ class Scene extends Component {
     }
   }
   onAnimationIteration = event => {
-    console.log(event);
-    console.log(event.elapsedTime);
-    console.log(event.animationName);
-    console.log(event.eventPhase);
     if (!this.props.loading && this.state.animate && !(event.elapsedTime % 4)) {
       this.setState({ animate: false });
     }
   }
   render() {
     const { currentCategory, themedCategories, loading, error } = this.props
-    const content = loading ? (
+    const oldcontent = loading ? (
       <Loading message={loading}>
         <div />
       </Loading>
@@ -73,11 +70,22 @@ class Scene extends Component {
         error={error}
       />
     );
+    const content = loading ? (
+      <Loading message={loading}>
+        <div />
+      </Loading>
+    ) : null;
     return (
       <Container
         onAnimationIteration={this.onAnimationIteration}
         animate={this.state.animate}
       >
+        <Clouds
+          themedCategories={themedCategories}
+          currentCategory={currentCategory}
+          loading={loading}
+          error={error}
+        />
         <City />
         {content}
       </Container>

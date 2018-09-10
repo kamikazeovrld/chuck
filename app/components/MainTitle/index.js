@@ -66,7 +66,10 @@ const Container = styled.div`
   }
 }`;
 
-function MainTitle() {
+function MainTitle(props) {
+  if (!props.loading) {
+    return null;
+  }
   return (
     <Container>
       <div>
@@ -76,6 +79,8 @@ function MainTitle() {
   );
 }
 
-MainTitle.propTypes = {};
+MainTitle.propTypes = {
+  loading: PropTypes.bool.isRequired,
+};
 
 export default MainTitle;

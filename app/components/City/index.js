@@ -71,8 +71,7 @@ const SvgMoonDetail = styled.circle`
       -o-animation: sunrise-detail 3s forwards;
       -moz-animation: sunrise-detail 3s forwards;
       -webkit-animation: sunrise-detail 3s forwards;`;
-}}
- `;
+}}`;
 
 const SvgStar = styled.circle`
   fill: #faefbe;
@@ -178,8 +177,8 @@ const SvgSkylineEllipseTransparent = styled.ellipse`
       -o-animation: skyline-sunset 3s forwards;
       -moz-animation: skyline-sunset 3s forwards;
       -webkit-animation: skyline-sunset 3s forwards;`;
-    }
-    return `  
+  }
+  return `  
       animation: skyline-sunrise 3s forwards;
       -o-animation: skyline-sunrise 3s forwards;
       -moz-animation: skyline-sunrise 3s forwards;
@@ -260,48 +259,6 @@ const SvgLeavesC1 = styled.circle`
 
 const SvgLeavesC2 = styled.circle`
   ill: #43a047;
-`;
-
-const SvgSunset = styled.rect`
-  animation: sunset 3s forwards;
-  -o-animation: sunset 3s forwards;
-  -moz-animation: sunset 3s forwards;
-  -webkit-animation: sunset 3s forwards;
-`;
-
-const SvgSunsetDetail = styled.rect`
-  animation: sunset-detail 3s forwards;
-  -o-animation: sunset-detail 3s forwards;
-  -moz-animation: sunset-detail 3s forwards;
-  -webkit-animation: sunset-detail 3s forwards;
-`;
-
-const SvgSunrise = styled.rect`
-  animation: sunrise 3s forwards;
-  -o-animation: sunrise 3s forwards;
-  -moz-animation: sunrise 3s forwards;
-  -webkit-animation: sunrise 3s forwards;
-`;
-
-const SvgSunriseDetail = styled.rect`
-  animation: sunrise-detail 3s forwards;
-  -o-animation: sunrise-detail 3s forwards;
-  -moz-animation: sunrise-detail 3s forwards;
-  -webkit-animation: sunrise-detail 3s forwards;
-`;
-
-const SkylineSunset = styled.rect`
-  animation: skyline-sunset 3s forwards;
-  -o-animation: skyline-sunset 3s forwards;
-  -moz-animation: skyline-sunset 3s forwards;
-  -webkit-animation: skyline-sunset 3s forwards;
-`;
-
-const SkylineSunrise = styled.rect`
-  animation: skyline-sunrise 3s forwards;
-  -o-animation: skyline-sunrise 3s forwards;
-  -moz-animation: skyline-sunrise 3s forwards;
-  -webkit-animation: skyline-sunrise 3s forwards;
 `;
 
 function City(props) {

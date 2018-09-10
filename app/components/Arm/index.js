@@ -98,10 +98,6 @@ class Arm extends Component {
     }
   }
   onAnimationIteration = event => {
-    console.log(event);
-    console.log(event.elapsedTime);
-    console.log(event.animationName);
-    console.log(event.eventPhase);
     if (!this.props.loading && this.state.animate && !(event.elapsedTime % 4)) {
       this.setState({ animate: false });
     }

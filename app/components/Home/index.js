@@ -18,6 +18,7 @@ const Container = styled(FullContainer)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow: auto;
   ${props => {
     if (props.theme.sunset) {
@@ -46,7 +47,7 @@ function Home(props) {
         <title>HomePage</title>
         <meta name="description" content="Description of HomePage" />
       </Helmet>
-      <MainTitle />
+      <MainTitle loading={props.loading} />
       <Wrapper {...props} />
     </Container>
   );
