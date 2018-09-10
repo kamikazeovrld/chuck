@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -33,24 +33,56 @@ const Container = styled.div`
   transform-origin: 660rem 415rem;
 `;
 
-function Scene(props) {
-  const {categories, currentCategory, themedCategories, loading, error, toggleAnimation, animate, showLoading} = props
-  const content = (<Categories
-    themedCategories={themedCategories}
-    currentCategory={currentCategory}
-    loading={loading}
-    error={error}
-  />)
-  const loadingBar = showLoading ? (<Loading message={loading}><div /></Loading>) : null;
-  return (
-    <Container animate={animate}>
-      <City
-        onMouseEnter={() => toggleAnimation(true)}
-        onMouseLeave={() => toggleAnimation(false)}
+class Scene extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      animate: false,
+    };
+  }
+  componentDidMount() {
+    if (this.props.loading) {
+      this.setState({animate: true})
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (!prevProps.loading && this.props.loading) {
+      this.setState({animate: true});
+    }
+  }
+  onAnimationIteration = event => {
+    console.log(event);
+    console.log(event.elapsedTime);
+    console.log(event.animationName);
+    console.log(event.eventPhase);
+    if (!this.props.loading && this.state.animate && !(event.elapsedTime % 4)) {
+      this.setState({ animate: false });
+    }
+  }
+  render() {
+    const { currentCategory, themedCategories, loading, error } = this.props
+    const content = loading ? (
+      <Loading message={loading}>
+        <div />
+      </Loading>
+    ) : (
+      <Categories
+        themedCategories={themedCategories}
+        currentCategory={currentCategory}
+        loading={loading}
+        error={error}
       />
-      {loadingBar}
-    </Container>
-  );
+    );
+    return (
+      <Container
+        onAnimationIteration={this.onAnimationIteration}
+        animate={this.state.animate}
+      >
+        <City />
+        {content}
+      </Container>
+    );
+  }
 }
 
 Scene.propTypes = {
@@ -62,7 +94,6 @@ Scene.propTypes = {
   categories: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
-  showLoading: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };
 

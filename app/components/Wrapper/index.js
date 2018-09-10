@@ -21,20 +21,17 @@ const Container = styled.div`
 class Wrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      animate: false,
-    };
   }
-  toggleAnimation = animate => this.setState({ animate });
+
   render() {
     return (
       <Container>
         <Scene
           {...this.props}
-          {...this.state}
+          onAnimationIteration={this.onAnimationIteration}
           toggleAnimation={this.toggleAnimation}
         />
-        <Chuck {...this.props} {...this.state} />
+        <Chuck {...this.props} />
       </Container>
     );
   }
@@ -48,7 +45,6 @@ Wrapper.propTypes = {
   categories: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
-  showLoading: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };
 

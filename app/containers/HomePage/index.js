@@ -37,24 +37,12 @@ export class HomePage extends React.Component {
   }
   render() {
     console.log('Homepage>props>', this.props);
-    const { loading, loadingStart } = this.props;
-    let showLoading = false;
-
-    console.log('Homepage>loadingStart>', loadingStart);
-    console.log('Homepage>now>', Date.now());
-    console.log('Homepage>offset>', loadingStart + 5000);
-    console.log('Homepage>result>', loadingStart + 5000 > Date.now());
-    // todo
-    // if (loading || loadingStart + 500 < Date.now()) {
-    if (loadingStart + 5000 > Date.now()) {
-      showLoading = true;
-    }
     const theme = {
-      sunset: showLoading,
+      sunset: this.props.loading,
     };
     return (
       <ThemeProvider theme={theme}>
-        <Home {...this.props} showLoading={showLoading} />
+        <Home {...this.props} />
       </ThemeProvider>
     );
   }
@@ -77,7 +65,6 @@ const mapStateToProps = createStructuredSelector({
   categories: makeSelectCategories(),
   currentCategory: makeSelectCurrentCategory(),
   loading: makeSelectLoading(),
-  loadingStart: makeSelectLoadingStart(),
   error: makeSelectError(),
 });
 

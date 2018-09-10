@@ -10,7 +10,7 @@ import { makeSelectLoadingStart } from 'containers/App/selectors';
 import request from 'utils/request';
 import { makeSelectCurrentCategory } from 'containers/HomePage/selectors';
 
-const TIMEOUT = 10000;
+const TIMEOUT = 2000;
 
 /**
  * Categories request/response handler
