@@ -15,13 +15,91 @@ html {
     font-size: 1px;
 }
 
-body {
-    display: flex;
-    background: #03a9f4;
-    justify-content: center;
-    min-height: 100%;
+body, #app {
+    height: 100%;
+    width: 100%;
 }
 body > * {
     // vertical-align: middle;
 }
+
+#app {
+}
+
+  @keyframes sunset {
+    0% {
+      fill: #ffee58;
+      r: 65;
+    }
+    100% {
+      fill: #e0e0e0;
+      r: 55;
+    }
+  }
+  @keyframes sunset-detail {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes sunrise {
+    0% {
+      fill: #e0e0e0;
+      r: 55;
+    }
+    100% {
+      fill: #ffee58;
+      r: 65;
+    }
+  }
+  @keyframes sunrise-detail {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes sky-sunset {
+    0% {
+      background: #03a9f4;
+      fill: #03a9f4;
+    }
+    100% {
+      background: #01579b;
+      fill: #01579b;
+    }
+  }
+  @keyframes sky-sunrise {
+    0% {
+      background: #01579b;
+      fill: #01579b;
+    }
+    100% {
+      background: #03a9f4;
+      fill: #03a9f4;
+    }
+  }
+  @keyframes skyline-sunset {
+    0% {
+      fill: #01579b;
+      stroke: #01579b;
+    }
+    100% {
+      fill: #263238;
+      stroke: #263238;
+    }
+  }
+  @keyframes skyline-sunrise {
+    0% {
+      fill: #263238;
+      stroke: #263238;
+    }
+    100% {
+      fill: #01579b;
+      stroke: #01579b;
+    }
+  }
 `;

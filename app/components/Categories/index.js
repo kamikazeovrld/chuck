@@ -63,7 +63,7 @@ const Title = styled.div`
 const TitleText = styled.div`
   display: table-cell;
   vertical-align: middle;
-  color: #546E7A;
+  color: #546e7a;
   font-size: 25rem;
   text-align: center;
 `;

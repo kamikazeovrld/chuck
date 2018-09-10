@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -18,16 +18,30 @@ const Container = styled.div`
   margin: 0rem 0;
 `;
 
-function Wrapper(props) {
-  return (
-    <Container>
-      <Scene {...props} />
-      <Chuck />
-    </Container>
-  );
+class Wrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animate: false,
+    };
+  }
+  toggleAnimation = animate => this.setState({ animate });
+  render() {
+    return (
+      <Container>
+        <Scene
+          {...this.props}
+          {...this.state}
+          toggleAnimation={this.toggleAnimation}
+        />
+        <Chuck {...this.props} {...this.state} />
+      </Container>
+    );
+  }
 }
 
 Wrapper.propTypes = {
+  animate: PropTypes.bool,
   loadCategories: PropTypes.func.isRequired,
   homepage: PropTypes.object.isRequired,
   themedCategories: PropTypes.array.isRequired,
@@ -35,6 +49,10 @@ Wrapper.propTypes = {
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
   error: PropTypes.string,
+};
+
+Wrapper.defaultProps = {
+  animate: false,
 };
 
 export default Wrapper;

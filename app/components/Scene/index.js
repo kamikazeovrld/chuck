@@ -14,6 +14,7 @@ import Vase from 'components/Vase';
 import Cabinet from 'components/Cabinet';
 import City from 'components/City';
 import Categories from 'components/Categories';
+import Loading from 'components/LoadingBar';
 
 const Container = styled.div`
   @keyframes scene {
@@ -28,27 +29,29 @@ const Container = styled.div`
   display: inline-block;
   width: 800rem;
   height: 575rem;
-  border-bottom: solid 10rem #905d9b;
-  animation: scene 2s ease-in-out alternate infinite;
+  ${({animate}) => animate ? 'animation: scene 2s ease-in-out alternate infinite;': ''}
   transform-origin: 660rem 415rem;
 `;
 
 function Scene(props) {
-  const {categories, currentCategory, themedCategories, loading, error} = props
+  const {categories, currentCategory, themedCategories, loading, error, toggleAnimation, animate} = props
+  const content = (<Categories
+    themedCategories={themedCategories}
+    currentCategory={currentCategory}
+    loading={loading}
+    error={error}
+  />)
   return (
-    <Container>
-      <City />
-      <Categories
-        themedCategories={themedCategories}
-        currentCategory={currentCategory}
-        loading={loading}
-        error={error}
-      />
+    <Container animate={animate}>
+      <City onMouseEnter={() => toggleAnimation(true)} onMouseLeave={() => toggleAnimation(false)} />
+      <Loading message={'some message'}><div /></Loading>
     </Container>
   );
 }
 
 Scene.propTypes = {
+  toggleAnimation: PropTypes.func.isRequired,
+  animate: PropTypes.bool.isRequired,
   loadCategories: PropTypes.func.isRequired,
   homepage: PropTypes.object.isRequired,
   themedCategories: PropTypes.array.isRequired,

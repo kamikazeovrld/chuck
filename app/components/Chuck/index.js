@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Hat from 'components/Hat';
@@ -26,7 +26,7 @@ const Container = styled.div`
   transform: rotateZ(6deg);
 `;
 
-function Chuck() {
+function Chuck(props) {
   return (
     <Container>
       <Hat />
@@ -35,13 +35,15 @@ function Chuck() {
       <Hair />
       <Beard />
       <Shirt />
-      <Arm />
+      <Arm {...props} />
       <Trousers />
-      <Shoes />
+      <Shoes {...props} />
     </Container>
   );
 }
 
-Chuck.propTypes = {};
+Chuck.propTypes = {
+  animate: PropTypes.bool.isRequired
+};
 
 export default Chuck;

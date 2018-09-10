@@ -24,7 +24,7 @@ const Shoes = styled.div`
   border-top-left-radius: 40rem 33rem;
   transform: rotateZ(-6deg);
   transform-origin: top center;
-  animation: shoes 2s ease-in-out alternate infinite;
+  ${({animate}) => animate ? 'animation: shoes 2s ease-in-out alternate infinite;': ''}
 `;
 
 export default Shoes;

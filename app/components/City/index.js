@@ -10,86 +10,10 @@ import styled from 'styled-components';
 
 const Container = styled.section`
   height: 575rem;
-  @keyframes sunset {
-    0% {
-      fill: #ffee58;
-      r: 65;
-    }
-    100% {
-      fill: #e0e0e0;
-      r: 55;
-    }
-  }
-  @keyframes sunset-detail {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  @keyframes sunrise {
-    0% {
-      fill: #e0e0e0;
-      r: 55;
-    }
-    100% {
-      fill: #ffee58;
-      r: 65;
-    }
-  }
-  @keyframes sunrise-detail {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-  @keyframes sky-sunset {
-    0% {
-      background: #03a9f4;
-      fill: #03a9f4;
-    }
-    100% {
-      background: #01579b;
-      fill: #01579b;
-    }
-  }
-  @keyframes sky-sunrise {
-    0% {
-      background: #01579b;
-      fill: #01579b;
-    }
-    100% {
-      background: #03a9f4;
-      fill: #03a9f4;
-    }
-  }
-  @keyframes skyline-sunset {
-    0% {
-      fill: #01579b;
-      stroke: #01579b;
-    }
-    100% {
-      fill: #263238;
-      stroke: #263238;
-    }
-  }
-  @keyframes skyline-sunrise {
-    0% {
-      fill: #263238;
-      stroke: #263238;
-    }
-    100% {
-      fill: #01579b;
-      stroke: #01579b;
-    }
-  }
 `;
 
 const SvgCity = styled.svg`
-  background: #03a9f4;
+  background: transparent;
   width: 100%;
   height: 100%;
   min-height: 400px;
@@ -97,39 +21,170 @@ const SvgCity = styled.svg`
 
 const SvgSun = styled.circle`
   fill: #ffee58;
+  ${(props) => {
+  if (props.sunset) {
+    return ` 
+      animation: sunset 3s forwards;
+      -o-animation: sunset 3s forwards;
+      -moz-animation: sunset 3s forwards;
+      -webkit-animation: sunset 3s forwards;`;
+    }
+    return `  
+      animation: sunrise 3s forwards;
+      -o-animation: sunrise 3s forwards;
+      -moz-animation: sunrise 3s forwards;
+      -webkit-animation: sunrise 3s forwards`;
+}}
 `;
+
+const SvgSunDetail = styled.circle`
+  ${(props) => {
+  if (props.sunset) {
+    return ` 
+      animation: sunset-detail 3s forwards;
+      -o-animation: sunset-detail 3s forwards;
+      -moz-animation: sunset-detail 3s forwards;
+      -webkit-animation: sunset-detail 3s forwards;`;
+    }
+    return `  
+      animation: sunrise-detail 3s forwards;
+      -o-animation: sunrise-detail 3s forwards;
+      -moz-animation: sunrise-detail 3s forwards;
+      -webkit-animation: sunrise-detail 3s forwards;`;
+}}
+ `;
 
 const SvgMoonDetail = styled.circle`
   fill: #bdbdbd;
   opacity: 0;
+
+  ${(props) => {
+  if (props.sunset) {
+    return `
+      animation: sunset-detail 3s forwards;
+      -o-animation: sunset-detail 3s forwards;
+      -moz-animation: sunset-detail 3s forwards;
+      -webkit-animation: sunset-detail 3s forwards;`;
+    }
+    return `  
+      animation: sunrise-detail 3s forwards;
+      -o-animation: sunrise-detail 3s forwards;
+      -moz-animation: sunrise-detail 3s forwards;
+      -webkit-animation: sunrise-detail 3s forwards;`;
+}}
  `;
 
 const SvgStar = styled.circle`
   fill: #faefbe;
   opacity: 0;
+
+  ${(props) => {
+  if (props.sunset) {
+    return `
+      animation: sunset-detail 3s forwards;
+      -o-animation: sunset-detail 3s forwards;
+      -moz-animation: sunset-detail 3s forwards;
+      -webkit-animation: sunset-detail 3s forwards;`;
+    }
+    return `  
+      animation: sunrise-detail 3s forwards;
+      -o-animation: sunrise-detail 3s forwards;
+      -moz-animation: sunrise-detail 3s forwards;
+      -webkit-animation: sunrise-detail 3s forwards;`;
+}}
  `;
 
 const SvgSkylinePoly = styled.polygon`
   fill: #01579b;
   stroke: #01579b;
+  ${(props) => {
+  if (props.sunset) {
+    return ` 
+      animation: skyline-sunset 3s forwards;
+      -o-animation: skyline-sunset 3s forwards;
+      -moz-animation: skyline-sunset 3s forwards;
+      -webkit-animation: skyline-sunset 3s forwards;`;
+    }
+    return `  
+      animation: skyline-sunrise 3s forwards;
+      -o-animation: skyline-sunrise 3s forwards;
+      -moz-animation: skyline-sunrise 3s forwards;
+      -webkit-animation: skyline-sunrise 3s forwards;`;
+}}
 `;
 
 const SvgSkylineLine = styled.line`
   fill: #01579b;
   stroke: #01579b;
+  ${(props) => {
+  if (props.sunset) {
+    return ` 
+      animation: skyline-sunset 3s forwards;
+      -o-animation: skyline-sunset 3s forwards;
+      -moz-animation: skyline-sunset 3s forwards;
+      -webkit-animation: skyline-sunset 3s forwards;`;
+    }
+    return `  
+      animation: skyline-sunrise 3s forwards;
+      -o-animation: skyline-sunrise 3s forwards;
+      -moz-animation: skyline-sunrise 3s forwards;
+      -webkit-animation: skyline-sunrise 3s forwards;`;
+}}
 `;
 
 const SvgSkylineEllipse = styled.ellipse`
   fill: #01579b;
   stroke: #01579b;
+  ${(props) => {
+  if (props.sunset) {
+    return ` 
+      animation: skyline-sunset 3s forwards;
+      -o-animation: skyline-sunset 3s forwards;
+      -moz-animation: skyline-sunset 3s forwards;
+      -webkit-animation: skyline-sunset 3s forwards;`;
+    }
+    return `  
+      animation: skyline-sunrise 3s forwards;
+      -o-animation: skyline-sunrise 3s forwards;
+      -moz-animation: skyline-sunrise 3s forwards;
+      -webkit-animation: skyline-sunrise 3s forwards;`;
+}}
 `;
 
 const SvgSkylineTransparent = styled.svg`
   fill: #03a9f4;
+  ${(props) => {
+  if (props.sunset) {
+    return ` 
+      animation: skyline-sunset 3s forwards;
+      -o-animation: skyline-sunset 3s forwards;
+      -moz-animation: skyline-sunset 3s forwards;
+      -webkit-animation: skyline-sunset 3s forwards;`;
+    }
+    return `  
+      animation: skyline-sunrise 3s forwards;
+      -o-animation: skyline-sunrise 3s forwards;
+      -moz-animation: skyline-sunrise 3s forwards;
+      -webkit-animation: skyline-sunrise 3s forwards;`;
+}}
 `;
 
 const SvgSkylineEllipseTransparent = styled.ellipse`
   fill: #03a9f4;
+  ${(props) => {
+  if (props.sunset) {
+    return ` 
+      animation: skyline-sunset 3s forwards;
+      -o-animation: skyline-sunset 3s forwards;
+      -moz-animation: skyline-sunset 3s forwards;
+      -webkit-animation: skyline-sunset 3s forwards;`;
+    }
+    return `  
+      animation: skyline-sunrise 3s forwards;
+      -o-animation: skyline-sunrise 3s forwards;
+      -moz-animation: skyline-sunrise 3s forwards;
+      -webkit-animation: skyline-sunrise 3s forwards;`;
+}}
 `;
 
 const SvgBuildingBase = styled.rect`
@@ -249,56 +304,56 @@ const SkylineSunrise = styled.rect`
   -webkit-animation: skyline-sunrise 3s forwards;
 `;
 
-function City() {
+function City(props) {
   return (
-    <Container>
-      <SvgCity viewBox="0 0 1100 800" shapeRendering="optimizeSpeed" xmlns="http://www.w3.org/2000/svg">
+    <Container {...props} sunset>
+      <SvgCity sunset viewBox="0 0 1100 800" shapeRendering="optimizeSpeed" xmlns="http://www.w3.org/2000/svg">
         {/* sky elements  */}
-        <SvgSun cx="850" cy="200" r="65" />
-        <SvgMoonDetail cx="845" cy="220" r="4" />
-        <SvgMoonDetail cx="865" cy="195" r="6" />
-        <SvgMoonDetail cx="870" cy="225" r="10" />
-        <SvgStar cx="0" cy="200" r="3 " />
-        <SvgStar cx="50" cy="50" r="2 " />
-        <SvgStar cx="100" cy="100" r="4 " />
-        <SvgStar cx="250" cy="75" r="2 " />
-        <SvgStar cx="300" cy="200" r="3 " />
-        <SvgStar cx="350" cy="300" r="2 " />
-        <SvgStar cx="400" cy="150" r="2 " />
-        <SvgStar cx="500" cy="100" r="3 " />
-        <SvgStar cx="600" cy="200" r="2 " />
-        <SvgStar cx="650" cy="50" r="2 " />
-        <SvgStar cx="700" cy="300" r="3 " />
-        <SvgStar cx="750" cy="150" r="2 " />
-        <SvgStar cx="850" cy="75" r="3 " />
-        <SvgStar cx="1000" cy="100" r="4 " />
-        <SvgStar cx="1050" cy="50" r="2 " />
-        <SvgStar cx="1100" cy="175" r="2 " />
+        <SvgSun sunset cx="850" cy="200" r="65" />
+        <SvgMoonDetail sunset cx="845" cy="220" r="4" />
+        <SvgMoonDetail sunset cx="865" cy="195" r="6" />
+        <SvgMoonDetail sunset cx="870" cy="225" r="10" />
+        <SvgStar sunset cx="0" cy="200" r="3 " />
+        <SvgStar sunset cx="50" cy="50" r="2 " />
+        <SvgStar sunset cx="100" cy="100" r="4 " />
+        <SvgStar sunset cx="250" cy="75" r="2 " />
+        <SvgStar sunset cx="300" cy="200" r="3 " />
+        <SvgStar sunset cx="350" cy="300" r="2 " />
+        <SvgStar sunset cx="400" cy="150" r="2 " />
+        <SvgStar sunset cx="500" cy="100" r="3 " />
+        <SvgStar sunset cx="600" cy="200" r="2 " />
+        <SvgStar sunset cx="650" cy="50" r="2 " />
+        <SvgStar sunset cx="700" cy="300" r="3 " />
+        <SvgStar sunset cx="750" cy="150" r="2 " />
+        <SvgStar sunset cx="850" cy="75" r="3 " />
+        <SvgStar sunset cx="1000" cy="100" r="4 " />
+        <SvgStar sunset cx="1050" cy="50" r="2 " />
+        <SvgStar sunset cx="1100" cy="175" r="2 " />
         {/* skyline */}
         {/* block 1 */}
-        <SvgSkylinePoly points="50,750 50,250 100,235 235,235 275,250 275,750 " />
-        <SvgSkylineLine x1="150" y1="240" x2="150" y2="125" stroke-width="6 " />
-        <SvgSkylineLine x1="200" y1="240" x2="200" y2="125" x3="235" y3="235" stroke-width="6 " />
+        <SvgSkylinePoly sunset points="50,750 50,250 100,235 235,235 275,250 275,750 " />
+        <SvgSkylineLine sunset x1="150" y1="240" x2="150" y2="125" stroke-width="6 " />
+        <SvgSkylineLine sunset x1="200" y1="240" x2="200" y2="125" x3="235" y3="235" stroke-width="6 " />
         {/* block 2 */}
-        <SvgSkylinePoly points="280,750 280,500 317,450 323,450 360,500 360,750 " />
+        <SvgSkylinePoly sunset points="280,750 280,500 317,450 323,450 360,500 360,750 " />
         {/* <text class="lights-tower" x="285" y="520" font-family="Verdana" font-size="16">FOSHAY</text> */}
-        <SvgSkylineLine x1="320" y1="430" x2="320" y2="330" stroke-width="3 " />
-        <SvgSkylineLine x1="320" y1="450" x2="320" y2="400" stroke-width="5 " />
+        <SvgSkylineLine sunset x1="320" y1="430" x2="320" y2="330" stroke-width="3 " />
+        <SvgSkylineLine sunset x1="320" y1="450" x2="320" y2="400" stroke-width="5 " />
         {/* block 3 */}
-        <SvgSkylinePoly points="435,750 435,375 450,375 450,355 450,315 465,315 465,295 465,275 545,275 545,315 560,315 560,355 560,375 575,375 575,750 " />
+        <SvgSkylinePoly sunset points="435,750 435,375 450,375 450,355 450,315 465,315 465,295 465,275 545,275 545,315 560,315 560,355 560,375 575,375 575,750 " />
         {/* block 4 */}
-        <SvgSkylinePoly points="580,750 580,500 615,500 615,475 650,475 650,450 685,450 685,385 750,375 775,385 775,425 800,425 800,450 825,450 825,475 850,475 850,750 " />
-        <SvgSkylineLine x1="750" y1="380" x2="750" y2="345" stroke-width="4 " />
+        <SvgSkylinePoly sunset points="580,750 580,500 615,500 615,475 650,475 650,450 685,450 685,385 750,375 775,385 775,425 800,425 800,450 825,450 825,475 850,475 850,750 " />
+        <SvgSkylineLine sunset x1="750" y1="380" x2="750" y2="345" stroke-width="4 " />
         {/* block 5 */}
-        <SvgSkylineEllipse cx="990" cy="290" rx="46" ry="9 " />
-        <SvgSkylineEllipseTransparent cx="990" cy="295" rx="28" ry="5 " />
-        <SvgSkylinePoly points="955,750 955,300 1025,300 1025,750 " />
-        <SvgSkylineEllipse cx="990" cy="300" rx="34" ry="5 " />
-        <SvgSkylineEllipse cx="990" cy="305" rx="34" ry="7 " />
-        <SvgSkylinePoly points="940,750 940,350 1040,350 1040,750 " />
-        <SvgSkylineEllipse cx="990" cy="350" rx="50" ry="5 " />
-        <SvgSkylineEllipse cx="990" cy="355" rx="50" ry="7 " />
-        <SvgSkylinePoly points="925,750 925,450 1050,450 1050,750 " />
+        <SvgSkylineEllipse sunset cx="990" cy="290" rx="46" ry="9 " />
+        <SvgSkylineEllipseTransparent sunset cx="990" cy="295" rx="28" ry="5 " />
+        <SvgSkylinePoly sunset points="955,750 955,300 1025,300 1025,750 " />
+        <SvgSkylineEllipse sunset cx="990" cy="300" rx="34" ry="5 " />
+        <SvgSkylineEllipse sunset cx="990" cy="305" rx="34" ry="7 " />
+        <SvgSkylinePoly sunset points="940,750 940,350 1040,350 1040,750 " />
+        <SvgSkylineEllipse sunset cx="990" cy="350" rx="50" ry="5 " />
+        <SvgSkylineEllipse sunset cx="990" cy="355" rx="50" ry="7 " />
+        <SvgSkylinePoly sunset points="925,750 925,450 1050,450 1050,750 " />
         {/* front */}
         {/* block 1 */}
 

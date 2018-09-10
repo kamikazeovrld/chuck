@@ -34,7 +34,7 @@ const Arm = styled.div`
     }
   }
   position: absolute;
-  background: #699BE5;
+  background: #699be5;
   top: 30rem;
   left: 250rem;
   width: 75rem;
@@ -42,13 +42,13 @@ const Arm = styled.div`
   border-radius: 18rem;
   transform: rotateZ(10deg);
   transform-origin: left center;
-  animation: arm-top 2s ease-in-out alternate infinite;
+  ${({animate}) => animate ? 'animation: arm-top 2s ease-in-out alternate infinite;': ''}
   :before, :after {
     content: "";
     position: absolute;
   }
   :before {
-    background: #699BE5;
+    background: #699be5;
     top: 0;
     right: -10rem;
     width: 36rem;
@@ -60,7 +60,8 @@ const Arm = styled.div`
     transform: rotateZ(15deg);
     transform-origin: top center;
     box-shadow: 0 10rem 0 0 #c2c8d8;
-    animation: arm-bottom 2s ease-in-out alternate infinite;
+    ${({animate}) => animate ? 'animation: arm-bottom 2s ease-in-out alternate infinite;': ''}
+    
   }
   :after {
     background: #c2c8d8;
@@ -73,7 +74,7 @@ const Arm = styled.div`
     border-bottom-right-radius: 10rem;
     transform: rotateZ(-15deg);
     transform-origin: right center;
-    animation: hand 2s ease-in-out alternate infinite;
+    ${({animate}) => animate ? 'animation: hand 2s ease-in-out alternate infinite;': ''}
   }
 `;
 
