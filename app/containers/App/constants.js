@@ -16,3 +16,5 @@ export const LOAD_CATEGORIES_ERROR = 'boilerplate/App/LOAD_CATEGORIES_ERROR';
 export const LOAD_CATEGORY = 'boilerplate/App/LOAD_CATEGORY';
 export const LOAD_CATEGORY_SUCCESS = 'boilerplate/App/LOAD_CATEGORY_SUCCESS';
 export const LOAD_CATEGORY_ERROR = 'boilerplate/App/LOAD_CATEGORY_ERROR';
+
+export const CLEAR_LOADING = 'boilerplate/App/CLEAR_LOADING';

@@ -15,7 +15,7 @@
  *    }
  */
 
-import { LOAD_CATEGORIES, LOAD_CATEGORIES_SUCCESS, LOAD_CATEGORIES_ERROR, LOAD_CATEGORY, LOAD_CATEGORY_SUCCESS, LOAD_CATEGORY_ERROR } from './constants';
+import { LOAD_CATEGORIES, LOAD_CATEGORIES_SUCCESS, LOAD_CATEGORIES_ERROR, LOAD_CATEGORY, LOAD_CATEGORY_SUCCESS, LOAD_CATEGORY_ERROR, CLEAR_LOADING } from './constants';
 
 /**
  * Load the joke categories, this action starts the request saga
@@ -101,5 +101,19 @@ export function categoryLoadingError(category, error) {
     type: LOAD_CATEGORY_ERROR,
     category,
     error,
+  };
+}
+
+/**
+ * Dispatched when loading the category fails
+ *
+ * @param  {string} category The name of the category that was being fetched
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of LOAD_ERRORS_ERROR passing the error
+ */
+export function clearLoading() {
+  return {
+    type: CLEAR_LOADING,
   };
 }

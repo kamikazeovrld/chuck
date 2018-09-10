@@ -92,7 +92,7 @@ class Categories extends React.PureComponent {
 
 Categories.propTypes = {
   themedCategories: PropTypes.array.isRequired,
-  categories: PropTypes.object.isRequired,
+  categories: PropTypes.object,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
   error: PropTypes.string,

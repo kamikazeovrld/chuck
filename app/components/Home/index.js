@@ -39,6 +39,7 @@ import messages from './messages';
 import PropTypes from 'prop-types';
 
 function Home(props) {
+  console.log('props>', props);
   return (
     <Container sunset={true}>
       <Helmet>
@@ -57,6 +58,7 @@ Home.propTypes = {
   themedCategories: PropTypes.array.isRequired,
   categories: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
+  showLoading: PropTypes.bool.isRequired,
   loading: PropTypes.string,
   error: PropTypes.string,
 };

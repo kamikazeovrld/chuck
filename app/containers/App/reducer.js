@@ -12,11 +12,20 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_CATEGORIES, LOAD_CATEGORIES_SUCCESS, LOAD_CATEGORIES_ERROR, LOAD_CATEGORY, LOAD_CATEGORY_SUCCESS, LOAD_CATEGORY_ERROR } from './constants';
+import {
+  LOAD_CATEGORIES,
+  LOAD_CATEGORIES_SUCCESS,
+  LOAD_CATEGORIES_ERROR,
+  LOAD_CATEGORY,
+  LOAD_CATEGORY_SUCCESS,
+  LOAD_CATEGORY_ERROR,
+  CLEAR_LOADING,
+} from './constants';
 
 
 // The initial state of the App
 const initialState = fromJS({
+  loadingStart: null,
   loading: null,
   error: null,
   currentCategory: null,
@@ -27,6 +36,7 @@ function appReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_CATEGORIES:
       return state.merge({
+        loadingStart: Date.now(),
         loading: 'Loading categories...',
         error: null,
         categories: {},
@@ -45,14 +55,17 @@ function appReducer(state = initialState, action) {
         {}
       );
       return state.merge({
-        loading: null,
         error: null,
         categories,
       });
     case LOAD_CATEGORIES_ERROR:
       return state.merge({
-        loading: null,
         error: action.error,
+      });
+    case CLEAR_LOADING:
+      return state.merge({
+        loadingStart: null,
+        loading: null,
       });
     default:
       return state;

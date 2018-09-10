@@ -41,6 +41,9 @@ const makeSelectCurrentCategory = () =>
 const makeSelectLoading = () =>
   createSelector(selectGlobal, globalState => globalState.get('loading'));
 
+const makeSelectLoadingStart = () =>
+  createSelector(selectGlobal, globalState => globalState.get('loadingStart'));
+
 const makeSelectError = () =>
   createSelector(selectGlobal, globalState => globalState.get('error'));
 
@@ -72,6 +75,7 @@ export {
   selectGlobal,
   makeSelectCurrentCategory,
   makeSelectLoading,
+  makeSelectLoadingStart,
   makeSelectError,
   makeSelectCategories,
   makeSelectThemedCategories,

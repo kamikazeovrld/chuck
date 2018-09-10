@@ -4,10 +4,13 @@
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD_CATEGORIES } from 'containers/App/constants';
-import { categoriesLoaded, categoriesError } from 'containers/App/actions';
+import { categoriesLoaded, categoriesLoadingError, clearLoading } from 'containers/App/actions';
+import { makeSelectLoadingStart } from 'containers/App/selectors';
 
 import request from 'utils/request';
 import { makeSelectCurrentCategory } from 'containers/HomePage/selectors';
+
+const TIMEOUT = 10000;
 
 /**
  * Categories request/response handler
@@ -20,9 +23,41 @@ export function* getCategories() {
     // Call our request helper (see 'utils/request')
     const categories = yield call(request, requestURL);
     yield put(categoriesLoaded(categories));
+    yield call(removeLoadingMessage);
   } catch (err) {
-    yield put(categoriesError(err));
+    console.log('err', err);
+    yield put(categoriesLoadingError(err));
+    yield call(removeLoadingMessage);
   }
+}
+
+function* removeLoadingMessage() {
+  console.log('removeLoadingMessage>Start');
+  const loadingStart = yield select(makeSelectLoadingStart());
+  console.log('removeLoadingMessage>loadingStart', loadingStart);
+
+  const result = yield call(timeout, loadingStart);
+  console.log('removeLoadingMessage>result', result);
+  yield put(clearLoading());
+}
+
+function timeout(loadingStart) {
+  console.log('removeLoadingMessage>timeout>Start timeout');
+  return new Promise((resolve, reject) => {
+    console.log('removeLoadingMessage>promise');
+    const finishTime = loadingStart + TIMEOUT;
+    if (Date.now() > finishTime) {
+      console.log('removeLoadingMessage>timeout>IT"s ready');
+      resolve(true);
+    } else {
+      const waitTime = finishTime - Date.now();
+      const t = setTimeout(() => {
+        console.log('removeLoadingMessage>timeout>WE Waited');
+        resolve(true);
+        clearTimeout(t);
+      }, waitTime);
+    }
+  });
 }
 
 /**

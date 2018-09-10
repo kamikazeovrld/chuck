@@ -34,17 +34,21 @@ const Container = styled.div`
 `;
 
 function Scene(props) {
-  const {categories, currentCategory, themedCategories, loading, error, toggleAnimation, animate} = props
+  const {categories, currentCategory, themedCategories, loading, error, toggleAnimation, animate, showLoading} = props
   const content = (<Categories
     themedCategories={themedCategories}
     currentCategory={currentCategory}
     loading={loading}
     error={error}
   />)
+  const loadingBar = showLoading ? (<Loading message={loading}><div /></Loading>) : null;
   return (
     <Container animate={animate}>
-      <City onMouseEnter={() => toggleAnimation(true)} onMouseLeave={() => toggleAnimation(false)} />
-      <Loading message={'some message'}><div /></Loading>
+      <City
+        onMouseEnter={() => toggleAnimation(true)}
+        onMouseLeave={() => toggleAnimation(false)}
+      />
+      {loadingBar}
     </Container>
   );
 }
@@ -58,6 +62,7 @@ Scene.propTypes = {
   categories: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
+  showLoading: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };
 

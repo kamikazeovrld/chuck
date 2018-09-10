@@ -48,6 +48,7 @@ Wrapper.propTypes = {
   categories: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
+  showLoading: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };
 

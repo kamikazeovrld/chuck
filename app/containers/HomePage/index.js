@@ -18,6 +18,7 @@ import {
   makeSelectThemedCategories,
   makeSelectCategories,
   makeSelectLoading,
+  makeSelectLoadingStart,
   makeSelectError,
   makeSelectCurrentCategory,
 } from 'containers/App/selectors';
@@ -35,13 +36,25 @@ export class HomePage extends React.Component {
     this.props.loadCategories();
   }
   render() {
-    console.log('props>', this.props);
+    console.log('Homepage>props>', this.props);
+    const { loading, loadingStart } = this.props;
+    let showLoading = false;
+
+    console.log('Homepage>loadingStart>', loadingStart);
+    console.log('Homepage>now>', Date.now());
+    console.log('Homepage>offset>', loadingStart + 5000);
+    console.log('Homepage>result>', loadingStart + 5000 > Date.now());
+    // todo
+    // if (loading || loadingStart + 500 < Date.now()) {
+    if (loadingStart + 5000 > Date.now()) {
+      showLoading = true;
+    }
     const theme = {
-      sunset: true,
+      sunset: showLoading,
     };
     return (
-      <ThemeProvider theme={theme} >
-        <Home {...this.props} />
+      <ThemeProvider theme={theme}>
+        <Home {...this.props} showLoading={showLoading} />
       </ThemeProvider>
     );
   }
@@ -54,6 +67,7 @@ HomePage.propTypes = {
   categories: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
+  loadingStart: PropTypes.number,
   error: PropTypes.string,
 };
 
@@ -63,6 +77,7 @@ const mapStateToProps = createStructuredSelector({
   categories: makeSelectCategories(),
   currentCategory: makeSelectCurrentCategory(),
   loading: makeSelectLoading(),
+  loadingStart: makeSelectLoadingStart(),
   error: makeSelectError(),
 });
 
