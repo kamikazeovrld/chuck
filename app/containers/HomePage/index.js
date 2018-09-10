@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { ThemeProvider } from 'styled-components';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -35,7 +36,14 @@ export class HomePage extends React.Component {
   }
   render() {
     console.log('props>', this.props);
-    return <Home {...this.props} />;
+    const theme = {
+      sunset: true,
+    };
+    return (
+      <ThemeProvider theme={theme} >
+        <Home {...this.props} />
+      </ThemeProvider>
+    );
   }
 }
 

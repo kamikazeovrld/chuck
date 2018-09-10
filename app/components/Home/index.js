@@ -20,7 +20,7 @@ const Container = styled(FullContainer)`
   align-items: center;
   overflow: auto;
   ${props => {
-    if (props.sunset) {
+    if (props.theme.sunset) {
       return `
         background-color: red;
         animation: sky-sunset 3s forwards;
