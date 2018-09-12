@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   padding: 50px 0;
@@ -106,30 +107,6 @@ const Cloud2 = styled(Cloud)`
   animation: moveclouds 12s linear infinite;
 `;
 
-const Cloud3 = styled(Cloud)`
-  left: -250px;
-  top: -175px;
-  transform: scale(0.8);
-  opacity: 0.8; /*opacity proportional to the size*/
-  animation: moveclouds 16s linear infinite;
-`;
-
-const Cloud4 = styled(Cloud)`
-  left: 470px;
-  top: -200px;
-  transform: scale(0.75);
-  opacity: 0.75; /*opacity proportional to the size*/
-  animation: moveclouds 14s linear infinite;
-`;
-
-const Cloud5 = styled(Cloud)`
-  left: -150px;
-  top: -150px;
-  transform: scale(0.8);
-  opacity: 0.8; /*opacity proportional to the size*/
-  animation: moveclouds 16s linear infinite;
-`;
-
 /* eslint-disable react/prefer-stateless-function */
 class Clouds extends React.PureComponent {
   constructor(props) {
@@ -146,11 +123,16 @@ class Clouds extends React.PureComponent {
   }
   render() {
     const clouds = this.state.clouds.map((cloud, index) => {
-      const CloudX = styled(Cloud)`${cloud}`;
+      const { title } = this.props.themedCategories[index];
+      const CloudX = styled(Cloud)`
+        ${cloud};
+      `;
       return (
-        <CloudX key={`index${index}`} >
-          <div>{this.props.themedCategories[index].title}</div>
-        </CloudX>
+        <Link to={`/category/${title}`}>
+          <CloudX key={`${title}`}>
+            <div>{title}</div>
+          </CloudX>
+        </Link>
       );
     })
     return (

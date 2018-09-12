@@ -18,8 +18,9 @@ import {
   makeSelectLoading,
   makeSelectError,
   makeSelectCurrentCategory,
+  makeSelectCategory,
 } from 'containers/App/selectors';
-import { loadCategories } from 'containers/App/actions';
+import { loadCategory } from 'containers/App/actions';
 import makeSelectCategoryPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -30,7 +31,7 @@ import Category from '../../components/Category';
 /* eslint-disable react/prefer-stateless-function */
 export class CategoryPage extends React.Component {
   componentDidMount() {
-    // this.props.loadCategories();
+    this.props.loadCategory();
   }
   render() {
     console.log('Categorypage>props>', this.props);
@@ -46,22 +47,24 @@ export class CategoryPage extends React.Component {
 }
 
 CategoryPage.propTypes = {
+  loadCategory: PropTypes.func.isRequired,
   categoryPage: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
   error: PropTypes.string,
 };
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps = (state, props) => createStructuredSelector({
   categoryPage: makeSelectCategoryPage(),
+  category: makeSelectCategory(props.match.params.category),
   currentCategory: makeSelectCurrentCategory(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
-});
+})(state, props);
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, props) {
   return {
-    loadCategories: () => dispatch(loadCategories()),
+    loadCategory: () => dispatch(loadCategory(props.match.params.category)),
   };
 }
 

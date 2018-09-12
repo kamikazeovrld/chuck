@@ -80,11 +80,11 @@ export function loadCategory(category) {
  *
  * @return {object}      An action object with a type of LOAD_CATEGORY_SUCCESS passing the category and jokes fetched from the network
  */
-export function categoryLoaded(category, jokes) {
+export function categoryLoaded(category, joke) {
   return {
     type: LOAD_CATEGORY_SUCCESS,
     category,
-    jokes,
+    joke,
   };
 }
 

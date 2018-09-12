@@ -24,7 +24,7 @@ export default function App() {
     <FullContainer>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/category" component={CategoryPage} />
+        <Route exact path="/category/:category" component={CategoryPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </FullContainer>

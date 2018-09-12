@@ -22,7 +22,6 @@ import {
   CLEAR_LOADING,
 } from './constants';
 
-
 // The initial state of the App
 const initialState = fromJS({
   loadingStart: null,
@@ -41,7 +40,20 @@ function appReducer(state = initialState, action) {
         error: null,
         categories: {},
       });
-    case LOAD_CATEGORIES_SUCCESS:
+    case LOAD_CATEGORY:
+      return state
+        .merge({
+          loading: 'Loading joke...',
+          error: null,
+          categories: {},
+        })
+        .setIn(['categories', action.category], {
+          id: action.category,
+          loading: 'Loading joke...',
+          error: null,
+          joke: null,
+        });
+    case LOAD_CATEGORIES_SUCCESS: {
       const categories = action.categories.reduce(
         (acc, actionName) => ({
           ...acc,
@@ -49,7 +61,7 @@ function appReducer(state = initialState, action) {
             id: actionName,
             loading: null,
             error: null,
-            jokes: {},
+            joke: null,
           },
         }),
         {}
@@ -58,10 +70,36 @@ function appReducer(state = initialState, action) {
         error: null,
         categories,
       });
+    }
+    case LOAD_CATEGORY_SUCCESS: {
+      return state
+        .merge({
+          error: null,
+          loading: null,
+        })
+        .setIn(['categories', action.category], {
+          id: action.category,
+          loading: null,
+          error: null,
+          joke: action.joke,
+        });
+    }
     case LOAD_CATEGORIES_ERROR:
       return state.merge({
         error: action.error,
       });
+    case LOAD_CATEGORY_ERROR:
+      return state
+        .merge({
+          loading: null,
+          error: action.error,
+        })
+        .setIn(['categories', action.category], {
+          id: action.category,
+          loading: null,
+          error: action.error,
+          joke: null,
+        });
     case CLEAR_LOADING:
       return state.merge({
         loadingStart: null,

@@ -68,11 +68,19 @@ const makeSelectThemedCategories = () =>
     });
   });
 
+const makeSelectCategory = id =>
+  createSelector(makeSelectCategories(), categories => {
+    console.log('makeSelectCategory>categories', categories)
+    console.log('makeSelectCategory>categories', categories.toJS())
+    return categories.get(id);
+  });
+
 const makeSelectLocation = () =>
   createSelector(selectRoute, routeState => routeState.get('location').toJS());
 
 export {
   selectGlobal,
+  makeSelectCategory,
   makeSelectCurrentCategory,
   makeSelectLoading,
   makeSelectLoadingStart,

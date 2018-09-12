@@ -18,7 +18,6 @@ import {
   makeSelectThemedCategories,
   makeSelectCategories,
   makeSelectLoading,
-  makeSelectLoadingStart,
   makeSelectError,
   makeSelectCurrentCategory,
 } from 'containers/App/selectors';

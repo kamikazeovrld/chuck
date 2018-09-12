@@ -83,7 +83,6 @@ class Category extends React.Component {
           <title>CategoryPage</title>
           <meta name="description" content="Description of CategoryPage" />
         </Helmet>
-        <div onClick={this.punch} className="something">click me</div>
         <Wrapper>
           <ChuckPuncher
             onAnimationStart={this.onAnimationStart}
