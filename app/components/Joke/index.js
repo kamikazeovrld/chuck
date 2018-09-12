@@ -187,6 +187,11 @@ class Joke extends React.PureComponent {
       height: (rows.length + 2) * letterSize.height,
     };
   }
+  componentDidUpdate(preProps) {
+    if (this.props.animate && !preProps.animate) {
+      this.shatter();
+    }
+  }
   shatter = () => {
     this.state.tiles.map(section => {
       const { x, y, rotationX, rotationY, opacity, z, className } = section;
@@ -233,17 +238,14 @@ class Joke extends React.PureComponent {
         <JokeComponent width={this.state.width} height={this.state.height}><div>{tiles}</div></JokeComponent>
       </Container>
     );
-    return (
-      <div>
-        <ButtonComponent onClick={this.shatter}>click me</ButtonComponent>
-        <Container>
-          <JokeComponent width={this.state.width} height={this.state.height}><div>{tiles}</div></JokeComponent>
-        </Container>
-      </div>
-    );
   }
 }
 
-Joke.propTypes = {};
+Joke.propTypes = {
+  animate: PropTypes.bool.isRequired,
+  onAnimationStart: PropTypes.func.isRequired,
+  onAnimationEnd: PropTypes.func.isRequired,
+  onAnimationIteration: PropTypes.func.isRequired,
+};
 
 export default Joke;

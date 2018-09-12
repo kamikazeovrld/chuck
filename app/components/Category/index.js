@@ -33,7 +33,13 @@ const Container = styled(FullContainer)`
         -o-animation: sky-sunrise 3s forwards;
         -moz-animation: sky-sunrise 3s forwards;
         -webkit-animation: sky-sunrise 3s forwards;`;
-}}`;
+  }}
+  > .something {
+    color: white;
+    font-size: 40px;
+    background-color: red;
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,20 +50,57 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-function Category(props) {
-  console.log('props>', props);
-  return (
-    <Container>
-      <Helmet>
-        <title>CategoryPage</title>
-        <meta name="description" content="Description of CategoryPage" />
-      </Helmet>
-      <Wrapper>
-        <ChuckPuncher />
-        <Joke />
-      </Wrapper>
-    </Container>
-  );
+
+class Category extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animation: null,
+    };
+  }
+  onAnimationStart = event => {
+    console.log('onAnimationStart>', event);
+    console.log('onAnimationStart>animationName>', event.animationName);
+  }
+  onAnimationEnd = event => {
+    console.log('onAnimationEnd>', event);
+    console.log('onAnimationEnd>animationName>', event.animationName);
+    if (event.animationName === 'punch') {
+      this.setState({ animation: 'shatter' });
+    }
+  }
+  onAnimationIteration = event => {
+    console.log('onAnimationIteration>', event);
+    console.log('onAnimationIteration>animationName>', event.animationName);
+  }
+  punch = () => {
+    this.setState({ animation: 'punch' });
+  }
+  render() {
+    return (
+      <Container>
+        <Helmet>
+          <title>CategoryPage</title>
+          <meta name="description" content="Description of CategoryPage" />
+        </Helmet>
+        <div onClick={this.punch} className="something">click me</div>
+        <Wrapper>
+          <ChuckPuncher
+            onAnimationStart={this.onAnimationStart}
+            onAnimationEnd={this.onAnimationEnd}
+            onAnimationIteration={this.onAnimationIteration}
+            animate={this.state.animation === 'punch'}
+          />
+          <Joke
+            onAnimationStart={this.onAnimationStart}
+            onAnimationEnd={this.onAnimationEnd}
+            onAnimationIteration={this.onAnimationIteration}
+            animate={this.state.animation === 'shatter'}
+          />
+        </Wrapper>
+      </Container>
+    );
+  }
 }
 
 Category.propTypes = {
