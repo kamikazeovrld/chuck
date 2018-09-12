@@ -61,12 +61,12 @@ const ArmComponent = styled.div`
     border-bottom-right-radius: 18rem;
     transform: rotateZ(15deg);
     transform-origin: top center;
-    box-shadow: 0 10rem 0 0 #c2c8d8;
+    box-shadow: 0 10rem 0 0 #ffccbc;
     ${({animate}) => animate ? 'animation: arm-bottom 2s ease-in-out alternate infinite;': ''}
     
   }
   :after {
-    background: #c2c8d8;
+    background: #ffccbc;
     z-index: -1;
     right: 10rem;
     bottom: -60rem;

@@ -43,7 +43,6 @@ function Chuck(props) {
 }
 
 Chuck.propTypes = {
-  animate: PropTypes.bool.isRequired
 };
 
 export default Chuck;

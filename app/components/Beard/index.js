@@ -17,7 +17,7 @@ const Beard = styled.div`
   :before, :after {
     content: '';
     position: absolute;
-    background: #c2c8d8;
+    background: #ffccbc;
   }
   :before {
     top: 35rem;

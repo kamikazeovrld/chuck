@@ -11,8 +11,9 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import FullContainer from 'components/FullContainer';
 import MainTitle from 'components/MainTitle';
-
 import Wrapper from 'components/Wrapper';
+import Scene from 'components/Scene';
+import Chuck from 'components/Chuck';
 
 const Container = styled(FullContainer)`
   display: flex;
@@ -48,7 +49,10 @@ function Home(props) {
         <meta name="description" content="Description of HomePage" />
       </Helmet>
       <MainTitle loading={props.loading} />
-      <Wrapper {...props} />
+      <Wrapper {...props}>
+        <Scene {...props} />
+        <Chuck {...props} />
+      </Wrapper>
     </Container>
   );
 }
