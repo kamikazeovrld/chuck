@@ -21,10 +21,12 @@ import {
   makeSelectCategory,
 } from 'containers/App/selectors';
 import { loadCategory } from 'containers/App/actions';
+import { changeWidth } from './actions';
 import makeSelectCategoryPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import { mqs } from './constants';
 
 import Category from '../../components/Category';
 
@@ -32,11 +34,28 @@ import Category from '../../components/Category';
 export class CategoryPage extends React.Component {
   componentDidMount() {
     this.props.loadCategory();
+    let mq = null;
+    for (let i = 0; i < mqs.length; i += 1) {
+      if (!mq && mqs[i].matches) {
+        mq = mqs[i];
+        console.log('mediaWatcher>init>set>mq', mqs[i]);
+      }
+      mqs[i].addListener(this.WidthChange);
+    }
+    if (mq) {
+      console.log('CategoryPage>componentDidMount>mq', mq);
+      const { matches, media } = mq;
+      this.props.changeWidth({ matches, media });
+    }
+  }
+  WidthChange = mq => {
+    const { matches, media } = mq;
+    this.props.changeWidth({ matches, media });
   }
   render() {
-    console.log('Categorypage>props>', this.props);
     const theme = {
       sunset: this.props.loading,
+      wrapper: this.props.categoryPage.theme.wrapper,
     };
     return (
       <ThemeProvider theme={theme}>
@@ -47,6 +66,7 @@ export class CategoryPage extends React.Component {
 }
 
 CategoryPage.propTypes = {
+  changeWidth: PropTypes.func.isRequired,
   loadCategory: PropTypes.func.isRequired,
   categoryPage: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
@@ -64,6 +84,7 @@ const mapStateToProps = (state, props) => createStructuredSelector({
 
 function mapDispatchToProps(dispatch, props) {
   return {
+    changeWidth: width => dispatch(changeWidth(width)),
     loadCategory: () => dispatch(loadCategory(props.match.params.category)),
   };
 }

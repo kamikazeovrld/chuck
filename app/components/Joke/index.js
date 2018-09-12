@@ -11,14 +11,12 @@ import { TweenMax } from 'gsap/TweenMax';
 import uuid from 'uuid/v4';
 const tile = require('./tile.png');
 
-const fontSize = 20;
 const letterDimensions = {
   fontSize: 40,
   width: 24,
   height: 53,
 };
 
-const width = 300;
 const speed = 1;
 
 const Container = styled.div`
@@ -240,16 +238,14 @@ function getBorder(position, count, side) {
   return '';
 }
 
-function getState(text) {
+function getState(text, width, fontSize) {
   const letterSize = {
     fontSize,
     width: (fontSize / letterDimensions.fontSize) * letterDimensions.width,
     height: (fontSize / letterDimensions.fontSize) * letterDimensions.height,
   };
   const maxCharactersPerRow = Math.floor(width / letterSize.width);
-  const rows = text
-    ? getRows(text, maxCharactersPerRow)
-    : [];
+  const rows = text ? getRows(text, maxCharactersPerRow) : [];
   const tiles = text
     ? getTiles(rows, maxCharactersPerRow, letterSize.width, letterSize.height, letterSize.fontSize)
     : [];
@@ -279,11 +275,12 @@ function getText(category) {
 class Joke extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = getState();
+    console.log('props of joke>', props)
+    this.state = getState(null, props.theme.joke.maxWidth, props.theme.joke.fontSize );
   }
   componentDidMount() {
     const text = getText(this.props.category);
-    this.setState(getState(text));
+    this.setState(getState(text, this.props.theme.joke.maxWidth, this.props.theme.joke.fontSize ));
   }
   componentDidUpdate(preProps) {
     const { animate, category } = this.props;
@@ -292,7 +289,7 @@ class Joke extends React.PureComponent {
     }
     if (category && (!preProps.category || preProps.category.loading !== category.loading || preProps.category.error !== category.error)) {
       const text = getText(this.props.category);
-      this.setState(getState(text));
+      this.setState(getState(text, this.props.theme.joke.maxWidth, this.props.theme.joke.fontSize ));
     }
   }
   shatter = () => {
@@ -364,6 +361,7 @@ class Joke extends React.PureComponent {
 }
 
 Joke.propTypes = {
+  theme: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired,
   animate: PropTypes.bool.isRequired,
   next: PropTypes.func.isRequired,

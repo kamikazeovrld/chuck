@@ -45,7 +45,7 @@ const Container = styled(FullContainer)`
 const Wrapper = styled.div`
   display: flex;
   position: relative;
-  width: 800rem;
+  width: ${props => props.theme.wrapper.width}rem;
   margin: 0rem 0;
   // align-items: flex-start;
   justify-content: center;
@@ -149,6 +149,7 @@ class Category extends React.Component {
             animate={this.state.animation === 'punch'}
           />
           <Joke
+            theme={this.props.categoryPage.theme}
             onAnimationStart={this.onAnimationStart}
             onAnimationEnd={this.onAnimationEnd}
             onAnimationIteration={this.onAnimationIteration}
@@ -164,6 +165,7 @@ class Category extends React.Component {
 
 Category.propTypes = {
   loadCategory: PropTypes.func.isRequired,
+  categoryPage: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired,
   loading: PropTypes.string,
   error: PropTypes.string,
