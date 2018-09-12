@@ -46,8 +46,21 @@ const Wrapper = styled.div`
   position: relative;
   width: 800rem;
   margin: 0rem 0;
-  align-items: flex-start;
+  // align-items: flex-start;
   justify-content: center;
+`;
+
+const Button = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0rem 0;
+  text-align: center;
+  font-size: 40px;
+  z-index: 1;
 `;
 
 
@@ -67,6 +80,10 @@ class Category extends React.Component {
     console.log('onAnimationEnd>animationName>', event.animationName);
     if (event.animationName === 'punch') {
       this.setState({ animation: 'shatter' });
+    }
+    if (event.animationName === 'shatter') {
+      this.setState({ animation: null });
+      this.props.loadCategory();
     }
   }
   onAnimationIteration = event => {
@@ -95,6 +112,8 @@ class Category extends React.Component {
             onAnimationEnd={this.onAnimationEnd}
             onAnimationIteration={this.onAnimationIteration}
             animate={this.state.animation === 'shatter'}
+            category={this.props.category}
+            next={this.punch}
           />
         </Wrapper>
       </Container>
@@ -103,8 +122,8 @@ class Category extends React.Component {
 }
 
 Category.propTypes = {
-  categoryPage: PropTypes.object.isRequired,
-  currentCategory: PropTypes.string,
+  loadCategory: PropTypes.func.isRequired,
+  category: PropTypes.object.isRequired,
   loading: PropTypes.string,
   error: PropTypes.string,
 };

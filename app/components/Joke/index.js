@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { TweenMax } from 'gsap/TweenMax';
+import uuid from 'uuid/v4';
 const tile = require('./tile.png');
 
 const fontSize = 20;
@@ -21,11 +22,12 @@ const width = 300;
 const speed = 1;
 
 const Container = styled.div`
-  overflow: hidden;
-  float: left;
-  border: 10px solid #333;
-  border-radius: 8px;
-  background-color: red;
+  position: relative;
+  > div:nth-child(1) {
+    overflow: hidden;
+    float: left;
+    background-color: transparent;
+  }
 `;
 
 const JokeComponent = styled.div`
@@ -37,6 +39,7 @@ const JokeComponent = styled.div`
 `;
 
 const LetterComponent = styled.div`
+  ${props => `${props.border}`}
   width: ${props => `${props.width}px`};
   height: ${props => `${props.height}px`};
   background: white;
@@ -47,6 +50,7 @@ const LetterComponent = styled.div`
 `;
 
 const PieceComponent = styled.div`
+  ${props => `${props.border}`}
   width: ${props => `${props.width}px`};
   height: ${props => `${props.height}px`};
   background: white;
@@ -55,12 +59,15 @@ const PieceComponent = styled.div`
 `;
 
 const ButtonComponent = styled.div`
-  width: 200px;
-  height: 50px;
-  background: red;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: white;
   text-align: center;
-  color: white;
-  font-size: 40px;
+  color: dark-grey;
+  font-size: 18px;
 `;
 
 function getRandomArbitrary(min, max) {
@@ -112,18 +119,24 @@ function getTiles(rows, maxCharactersPerRow, width, height, fontSize) {
       const padding = colCount - row.length;
       const paddingRight = Math.floor(padding / 2);
       const paddingLeft = padding - paddingRight;
-      tiles = tiles.concat(getPieces(paddingLeft, width, height, `L${i}`));
-      tiles = tiles.concat(getLetters(row, width, height, fontSize, `W${i}`));
-      tiles = tiles.concat(getPieces(paddingRight, width, height, `R${i}`));
+      tiles = tiles.concat(getPieces(paddingLeft, width, height, `${uuid()}${i}`, 'left'));
+      tiles = tiles.concat(getLetters(row, width, height, fontSize, `${uuid()}${i}`));
+      tiles = tiles.concat(getPieces(paddingRight, width, height, `${uuid()}${i}`, 'right'));
     } else {
-      tiles = tiles.concat(getPieces(colCount, width, height, `F${i}`));
+      if (i === 0) {
+        tiles = tiles.concat(getPieces(colCount, width, height, `${uuid()}${i}`, 'top'));
+      } else if (i === rowCount - 1) {
+        tiles = tiles.concat(getPieces(colCount, width, height, `${uuid()}${i}`, 'bottom'));
+      } else {
+        tiles = tiles.concat(getPieces(colCount, width, height, `${uuid()}${i}`, 'sides'));
+      }
     }
     tiles.push('break');
   }
   return tiles;
 }
 
-function getLetters(row, width, height, fontSize, classPrefix = '') {
+function getLetters(row, width, height, fontSize, classPrefix = '', side = null) {
   const letters = [];
   for (let j = 0; j < row.length; j += 1) {
     letters.push({
@@ -139,12 +152,14 @@ function getLetters(row, width, height, fontSize, classPrefix = '') {
       className: `letter${classPrefix}${j}`,
       letter: row[j],
       opacity: 0,
+      border: '',
     });
   }
   return letters;
 }
 
-function getPieces(count, width, height, classPrefix = '') {
+function getPieces(count, width, height, classPrefix = '', side = null) {
+  console.log('getPieces>side>', side, count)
   const sections = [];
   for (let i = 0; i < count; i += 1) {
     sections.push({
@@ -158,43 +173,135 @@ function getPieces(count, width, height, classPrefix = '') {
       rotationX: getRandomArbitrary(-720, 720),
       className: `piece${classPrefix}${i}`,
       opacity: 0,
+      border: getBorder(i, count, side),
     });
   }
   return sections;
+}
+
+function getBorder(position, count, side) {
+  console.log('getBorder()>', side);
+  if (!side) {
+    return '';
+  }
+  if (side === 'top') {
+    console.log('getBorder()>top>positio:count', position, count);
+    if (position === 0) {
+      return `
+      border-top: 5px solid #333;
+      border-left: 5px solid #333;
+      border-radius: 4px 0 0 0;
+    `;
+    }
+    if (position === count - 1) {
+      return `
+      border-top: 5px solid #333;
+      border-right: 5px solid #333;
+      border-radius: 0 4px 0 0;
+    `;
+    }
+    return `
+      border-top: 5px solid #333;
+      border-radius: 0;
+    `;
+  }
+  if (side === 'bottom') {
+    if (position === 0) {
+      return `
+      border-bottom: 5px solid #333;
+      border-left: 5px solid #333;
+      border-radius: 0 0 0 4px;
+    `;
+    }
+    if (position === count - 1) {
+      return `
+      border-bottom: 5px solid #333;
+      border-right: 5px solid #333;
+      border-radius: 0 0 4px 0;
+    `;
+    }
+    return `
+      border-bottom: 5px solid #333;
+      border-radius: 0;
+    `;
+  }
+  if (side === 'sides' || side === 'left') {
+    if (position === 0) {
+      return `
+      border-left: 5px solid #333;
+      border-radius: 0;
+    `;
+    }
+  }
+  if (side === 'sides' || side === 'right') {
+    if (position === count - 1) {
+      return `
+      border-right: 5px solid #333;
+      border-radius: 0;
+    `;
+    }
+  }
+  return '';
+}
+
+function getState(text) {
+  const letterSize = {
+    fontSize,
+    width: (fontSize / letterDimensions.fontSize) * letterDimensions.width,
+    height: (fontSize / letterDimensions.fontSize) * letterDimensions.height,
+  };
+  const maxCharactersPerRow = Math.floor(width / letterSize.width);
+  const rows = text
+    ? getRows(text, maxCharactersPerRow)
+    : [];
+  const tiles = text
+    ? getTiles(rows, maxCharactersPerRow, letterSize.width, letterSize.height, letterSize.fontSize)
+    : [];
+
+  return {
+    tiles,
+    width: (maxCharactersPerRow + 2) * letterSize.width,
+    height: (rows.length + 2) * letterSize.height,
+  };
+}
+
+function getText(category) {
+  let text = 'No joke loaded :(';
+  if (category) {
+    if (category.joke) {
+      text = category.joke.value;
+    } else if (category.error) {
+      text = category.error;
+    } else if (category.loading) {
+      text = category.loading;
+    }
+  }
+  return text;
 }
 
 /* eslint-disable react/prefer-stateless-function */
 class Joke extends React.PureComponent {
   constructor(props) {
     super(props);
-    const text =
-      'This is the joke text and we have 12345678901234567890123 it longer.';
-    const letterSize = {
-      fontSize,
-      width: (fontSize / letterDimensions.fontSize) * letterDimensions.width,
-      height: (fontSize / letterDimensions.fontSize) * letterDimensions.height,
-    };
-    const maxCharactersPerRow = Math.floor(width / letterSize.width);
-    const rows = getRows(text, maxCharactersPerRow);
-    const tiles = getTiles(rows, maxCharactersPerRow, letterSize.width, letterSize.height, letterSize.fontSize);
-
-    console.log('rows>', rows);
-    console.log('tiles>', tiles);
-
-    this.state = {
-      tiles,
-      width: (maxCharactersPerRow + 2) * letterSize.width,
-      height: (rows.length + 2) * letterSize.height,
-    };
+    this.state = getState();
+  }
+  componentDidMount() {
+    const text = getText(this.props.category);
+    this.setState(getState(text));
   }
   componentDidUpdate(preProps) {
-    if (this.props.animate && !preProps.animate) {
+    const { animate, category } = this.props;
+    if (animate && !preProps.animate) {
       this.shatter();
+    }
+    if (category && (!preProps.category || preProps.category.loading !== category.loading || preProps.category.error !== category.error)) {
+      const text = getText(this.props.category);
+      this.setState(getState(text));
     }
   }
   shatter = () => {
-    this.state.tiles.map(section => {
-      const { x, y, rotationX, rotationY, opacity, z, className } = section;
+    for (let i = 0; i < this.state.tiles.length - 1; i += 1) {
+      const { x, y, rotationX, rotationY, opacity, z, className } = this.state.tiles[i];
       const params = {
         x,
         y,
@@ -204,18 +311,33 @@ class Joke extends React.PureComponent {
         opacity,
       };
       TweenMax.to(`.${className}`, speed, params);
-      return 'nothing';
-    });
+    }
+    const i = this.state.tiles.length - 1
+    if (this.state.tiles[i]) {
+      const { x, y, rotationX, rotationY, opacity, z, className } = this.state.tiles[i];
+      const params = {
+        x,
+        y,
+        z,
+        rotationX,
+        rotationY,
+        opacity,
+        onComplete: () =>
+          this.props.onAnimationEnd({ animationName: 'shatter' }),
+      };
+      TweenMax.to(`.${className}`, speed, params);
+    }
   }
   render() {
     const tiles = this.state.tiles.map((tile, i) => {
       if (tile === 'break') {
         return <br key={`break${i}`} />;
       }
-      const { className, width, height } = tile;
+      const { className, width, height, border } = tile;
       if (tile.type === 'letter') {
         return (
           <LetterComponent
+            border={border}
             width={width}
             height={height}
             fontSize={tile.fontSize}
@@ -226,6 +348,7 @@ class Joke extends React.PureComponent {
       }
       return (
         <PieceComponent
+          border={border}
           width={width}
           height={height}
           className={className}
@@ -235,14 +358,19 @@ class Joke extends React.PureComponent {
     });
     return (
       <Container>
-        <JokeComponent width={this.state.width} height={this.state.height}><div>{tiles}</div></JokeComponent>
+        <div>
+          <JokeComponent width={this.state.width} height={this.state.height}><div>{tiles}</div></JokeComponent>
+        </div>
+        <ButtonComponent onClick={this.props.next}>Next Joke >></ButtonComponent>
       </Container>
     );
   }
 }
 
 Joke.propTypes = {
+  category: PropTypes.object.isRequired,
   animate: PropTypes.bool.isRequired,
+  next: PropTypes.func.isRequired,
   onAnimationStart: PropTypes.func.isRequired,
   onAnimationEnd: PropTypes.func.isRequired,
   onAnimationIteration: PropTypes.func.isRequired,
