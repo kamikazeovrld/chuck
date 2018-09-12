@@ -80,7 +80,7 @@ function MainTitle(props) {
 }
 
 MainTitle.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.string,
 };
 
 export default MainTitle;

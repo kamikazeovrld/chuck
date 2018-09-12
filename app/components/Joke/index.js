@@ -115,7 +115,6 @@ function getTiles(rows, maxCharactersPerRow, width, height, fontSize) {
   for (let i = 0; i < rowCount; i += 1) {
     if (rows[i - 1]) {
       const row = rows[i - 1];
-      console.log('KKrow>', row);
       const padding = colCount - row.length;
       const paddingRight = Math.floor(padding / 2);
       const paddingLeft = padding - paddingRight;
@@ -159,7 +158,6 @@ function getLetters(row, width, height, fontSize, classPrefix = '', side = null)
 }
 
 function getPieces(count, width, height, classPrefix = '', side = null) {
-  console.log('getPieces>side>', side, count)
   const sections = [];
   for (let i = 0; i < count; i += 1) {
     sections.push({
@@ -180,12 +178,10 @@ function getPieces(count, width, height, classPrefix = '', side = null) {
 }
 
 function getBorder(position, count, side) {
-  console.log('getBorder()>', side);
   if (!side) {
     return '';
   }
   if (side === 'top') {
-    console.log('getBorder()>top>positio:count', position, count);
     if (position === 0) {
       return `
       border-top: 5px solid #333;

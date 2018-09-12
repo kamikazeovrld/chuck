@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   padding: 50px 0;
@@ -128,8 +128,8 @@ class Clouds extends React.PureComponent {
         ${cloud};
       `;
       return (
-        <Link to={`/category/${title}`}>
-          <CloudX key={`${title}`}>
+        <Link to={`/category/${title}`} key={`${title}`}>
+          <CloudX>
             <div>{title}</div>
           </CloudX>
         </Link>

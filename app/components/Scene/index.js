@@ -94,12 +94,8 @@ class Scene extends Component {
 }
 
 Scene.propTypes = {
-  toggleAnimation: PropTypes.func.isRequired,
-  animate: PropTypes.bool.isRequired,
-  loadCategories: PropTypes.func.isRequired,
   homepage: PropTypes.object.isRequired,
   themedCategories: PropTypes.array.isRequired,
-  categories: PropTypes.object.isRequired,
   currentCategory: PropTypes.string,
   loading: PropTypes.string,
   error: PropTypes.string,

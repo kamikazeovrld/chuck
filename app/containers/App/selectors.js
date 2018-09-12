@@ -59,7 +59,8 @@ const makeSelectThemedCategories = () =>
     const themeList = Object.keys(theme);
     return categories.toArray().map((category, index) => {
       const themeIndex = index % themeList.length;
-      const categoryTheme = theme[themeList[themeIndex]]
+      const categoryTheme = theme[themeList[themeIndex]];
+      console.log('CATEGORY>', category)
       return {
         image: category.get('image'),
         title: category.get('id'),
@@ -71,8 +72,9 @@ const makeSelectThemedCategories = () =>
 const makeSelectCategory = id =>
   createSelector(makeSelectCategories(), categories => {
     console.log('makeSelectCategory>categories', categories)
-    console.log('makeSelectCategory>categories', categories.toJS())
-    return categories.get(id);
+    console.log('makeSelectCategory>categories', categories.toJS());
+    const category = categories.get(id)
+    return category ? category.toJS() : null;
   });
 
 const makeSelectLocation = () =>
