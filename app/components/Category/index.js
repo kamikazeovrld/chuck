@@ -10,7 +10,6 @@ import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import FullContainer from 'components/FullContainer';
-import MainTitle from 'components/MainTitle';
 import ChuckPuncher from 'components/ChuckPuncher';
 import Joke from 'components/Joke';
 
@@ -112,8 +111,8 @@ class Category extends React.Component {
     return (
       <Container>
         <Helmet>
-          <title>CategoryPage</title>
-          <meta name="description" content="Description of CategoryPage" />
+          <title>Joke</title>
+          <meta name="description" content="View joke details" />
         </Helmet>
 
         <Link to={`/`}>

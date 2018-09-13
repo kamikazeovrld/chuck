@@ -45,8 +45,8 @@ function Home(props) {
   return (
     <Container>
       <Helmet>
-        <title>HomePage</title>
-        <meta name="description" content="Description of HomePage" />
+        <title>Home</title>
+        <meta name="description" content="View all categories" />
       </Helmet>
       <MainTitle loading={props.loading} />
       <Wrapper {...props}>

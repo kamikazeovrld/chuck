@@ -25,6 +25,7 @@ body > * {
 }
 
 #app {
+  background-color: #03a9f4;
 }
 
   @keyframes sunset {

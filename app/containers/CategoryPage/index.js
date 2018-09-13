@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { ThemeProvider } from 'styled-components';
@@ -25,7 +24,6 @@ import { changeWidth } from './actions';
 import makeSelectCategoryPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import { mqs } from './constants';
 
 import Category from '../../components/Category';
@@ -74,13 +72,14 @@ CategoryPage.propTypes = {
   error: PropTypes.string,
 };
 
-const mapStateToProps = (state, props) => createStructuredSelector({
-  categoryPage: makeSelectCategoryPage(),
-  category: makeSelectCategory(props.match.params.category),
-  currentCategory: makeSelectCurrentCategory(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
-})(state, props);
+const mapStateToProps = (state, props) =>
+  createStructuredSelector({
+    categoryPage: makeSelectCategoryPage(),
+    category: makeSelectCategory(props.match.params.category),
+    currentCategory: makeSelectCurrentCategory(),
+    loading: makeSelectLoading(),
+    error: makeSelectError(),
+  })(state, props);
 
 function mapDispatchToProps(dispatch, props) {
   return {
