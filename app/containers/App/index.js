@@ -15,7 +15,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
-import CategoryPage from 'containers/CategoryPage/Loadable';
+import CategoryPage from 'containers/CategoryPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import FullContainer from 'components/FullContainer';
 
