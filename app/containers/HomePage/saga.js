@@ -13,7 +13,7 @@ import { makeSelectLoadingStart } from 'containers/App/selectors';
 
 import request from 'utils/request';
 
-const TIMEOUT = 5000;
+const TIMEOUT = 10000;
 
 /**
  * Categories request/response handler
